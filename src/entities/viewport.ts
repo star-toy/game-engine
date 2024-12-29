@@ -1,5 +1,12 @@
+import { MOUSE_DOWN, MOUSE_LEAVE, MOUSE_MOVE, MOUSE_UP } from './mediator';
+
+import mediator from './mediator';
+import stateStack, { CursorStyle } from './states/state-stack';
+
 export class Viewport {
   private ctx: CanvasRenderingContext2D;
+  private stateStack = stateStack;
+
   private scale: number = 1;
 
   public constructor(
@@ -9,6 +16,7 @@ export class Viewport {
     this.ctx = canvas.getContext('2d')!;
 
     this.initializeCanvasSize();
+    this.initializeEventListeners();
   }
 
   public render = () => {
@@ -33,5 +41,24 @@ export class Viewport {
       this.scale * devicePixelRatio,
       this.scale * devicePixelRatio,
     );
+  }
+
+  public initializeEventListeners() {
+    this.canvas.addEventListener('mousedown', (event) => {
+      mediator.publish(MOUSE_DOWN, event);
+    });
+    this.canvas.addEventListener('mousemove', (event) => {
+      mediator.publish(MOUSE_MOVE, new DOMPoint(event.clientX, event.clientY));
+    });
+    this.canvas.addEventListener('mouseup', (event) => {
+      mediator.publish(MOUSE_UP, new DOMPoint(event.clientX, event.clientY));
+    });
+    this.canvas.addEventListener('mouseleave', (event) => {
+      mediator.publish(MOUSE_LEAVE, new DOMPoint(event.clientX, event.clientY));
+    });
+
+    this.canvas.addEventListener('contextmenu', (event) => {
+      event.preventDefault();
+    });
   }
 }

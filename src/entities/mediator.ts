@@ -1,5 +1,10 @@
+import { State } from './states/state-stack';
+
 class Mediator {
-  private subscribers = new Map<keyof EventMap, EventMap[keyof EventMap]>();
+  private subscribers = new Map<
+    keyof EventMap,
+    { [K in keyof EventMap]: EventMap[K] }[keyof EventMap]
+  >();
 
   public subscribe(
     eventName: keyof EventMap,
@@ -14,9 +19,9 @@ class Mediator {
     this.subscribers.set(eventName, callback);
   }
 
-  public publish(
-    eventName: keyof EventMap,
-    detail: Parameters<EventMap[keyof EventMap]>[0],
+  public publish<T extends keyof EventMap>(
+    eventName: T,
+    detail: Parameters<EventMap[T]>[0],
   ) {
     const callback = this.subscribers.get(eventName) as any; // TODO: EventMap으로부터 타입 추론
 
@@ -35,7 +40,19 @@ class Mediator {
 export default new Mediator();
 
 export const MOUSE_DOWN = 'mouse-down';
+export const MOUSE_MOVE = 'mouse-move';
+export const MOUSE_UP = 'mouse-up';
+export const MOUSE_LEAVE = 'mouse-leave';
+
+export const PUSH_STATE_STACK = 'push-state-stack';
+export const POP_STATE_STACK = 'pop-state-stack';
 
 export interface EventMap {
   [MOUSE_DOWN]: (detail: MouseEvent) => void;
+  [MOUSE_MOVE]: (detail: DOMPoint) => void;
+  [MOUSE_UP]: (detail: DOMPoint) => void;
+  [MOUSE_LEAVE]: (detail: DOMPoint) => void;
+
+  [PUSH_STATE_STACK]: (detail: State) => void;
+  [POP_STATE_STACK]: (detail: null) => void;
 }
