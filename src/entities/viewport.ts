@@ -1,4 +1,10 @@
-import { MOUSE_DOWN, MOUSE_LEAVE, MOUSE_MOVE, MOUSE_UP } from './mediator';
+import {
+  CHANGE_CURSOR,
+  MOUSE_DOWN,
+  MOUSE_LEAVE,
+  MOUSE_MOVE,
+  MOUSE_UP,
+} from './mediator';
 
 import mediator from './mediator';
 import stateStack, { CursorStyle } from './states/state-stack';
@@ -17,6 +23,7 @@ export class Viewport {
 
     this.initializeCanvasSize();
     this.initializeEventListeners();
+    this.initializeEventSubscribers();
   }
 
   public render = () => {
@@ -59,6 +66,16 @@ export class Viewport {
 
     this.canvas.addEventListener('contextmenu', (event) => {
       event.preventDefault();
+    });
+  }
+
+  public initializeEventSubscribers() {
+    mediator.subscribe(CHANGE_CURSOR, (cursor: CursorStyle) => {
+      if (cursor.type === 'system') {
+        this.ctx.canvas.style.cursor = cursor.value;
+      } else {
+        this.ctx.canvas.style.cursor = `url(${cursor.value}) ${cursor.offsetX} ${cursor.offsetY}`;
+      }
     });
   }
 }

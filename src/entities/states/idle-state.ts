@@ -1,8 +1,13 @@
-import { State } from './state-stack';
+import { CursorStyle, State } from './state-stack';
 import { PanState } from './pan-state';
 import mediator, { PUSH_STATE_STACK } from '../mediator';
 
 export class IdleState implements State {
+  public readonly cursor: CursorStyle = {
+    type: 'system',
+    value: 'default',
+  };
+
   public constructor() {}
 
   public handleMouseDown(event: MouseEvent) {

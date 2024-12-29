@@ -1,7 +1,12 @@
-import { State } from './state-stack';
+import { CursorStyle, State } from './state-stack';
 import mediator, { MOUSE_MOVE, POP_STATE_STACK } from '../mediator';
 
 export class PanState implements State {
+  public readonly cursor: CursorStyle = {
+    type: 'system',
+    value: 'grabbing',
+  };
+
   public constructor(private origin: DOMPoint) {}
 
   public handleMouseDown(event: MouseEvent) {}

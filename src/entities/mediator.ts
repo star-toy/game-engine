@@ -1,4 +1,4 @@
-import { State } from './states/state-stack';
+import { CursorStyle, State } from './states/state-stack';
 
 class Mediator {
   private subscribers = new Map<
@@ -44,6 +44,8 @@ export const MOUSE_MOVE = 'mouse-move';
 export const MOUSE_UP = 'mouse-up';
 export const MOUSE_LEAVE = 'mouse-leave';
 
+export const CHANGE_CURSOR = 'change-cursor';
+
 export const PUSH_STATE_STACK = 'push-state-stack';
 export const POP_STATE_STACK = 'pop-state-stack';
 
@@ -52,6 +54,8 @@ export interface EventMap {
   [MOUSE_MOVE]: (detail: DOMPoint) => void;
   [MOUSE_UP]: (detail: DOMPoint) => void;
   [MOUSE_LEAVE]: (detail: DOMPoint) => void;
+
+  [CHANGE_CURSOR]: (detail: CursorStyle) => void;
 
   [PUSH_STATE_STACK]: (detail: State) => void;
   [POP_STATE_STACK]: (detail: null) => void;

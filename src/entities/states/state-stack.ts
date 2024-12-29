@@ -5,10 +5,13 @@ import mediator, {
   MOUSE_LEAVE,
   PUSH_STATE_STACK,
   POP_STATE_STACK,
+  CHANGE_CURSOR,
 } from '../mediator';
 import { IdleState } from './idle-state';
 
 export interface State {
+  readonly cursor: CursorStyle;
+
   handleMouseDown(event: MouseEvent): void;
   handleMouseMove(point: DOMPoint): void;
   handleMouseUp(point: DOMPoint): void;
@@ -30,10 +33,12 @@ class StateStack {
 
   public push(state: State) {
     this.stack.push(state);
+    mediator.publish(CHANGE_CURSOR, this.current.cursor);
   }
 
   public pop() {
     this.stack.pop();
+    mediator.publish(CHANGE_CURSOR, this.current.cursor);
   }
 
   public initializeEventSubscribers() {
