@@ -12,4 +12,14 @@ export class Controller {
 
     window.requestAnimationFrame(this.render);
   };
+
+  // TODO: save를 위한 toJSON
+  // TODO: load를 위한 fromJSON
+  // TODO: Puzzle Pieces
+  // TODO: Pieces on Edge
+  // TODO: Artwork Preview
+  // TODO: BGM
+  // TODO: Sound Effect
+  // TODO: Zoom in
+  // TODO: Zoom out
 }
