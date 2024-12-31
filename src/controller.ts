@@ -1,4 +1,4 @@
-import { Viewport } from './viewport';
+import { Viewport } from './view/viewport';
 
 export class Controller {
   private viewport: Viewport;

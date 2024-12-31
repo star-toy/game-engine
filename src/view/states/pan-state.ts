@@ -1,5 +1,9 @@
 import { CursorStyle, State } from './state-stack';
-import mediator, { MOUSE_MOVE, POP_STATE_STACK, TRANSLATE } from '../mediator';
+import mediator, {
+  MOUSE_MOVE,
+  POP_STATE_STACK,
+  TRANSLATE,
+} from '../../mediator';
 
 export class PanState implements State {
   public readonly cursor: CursorStyle = {

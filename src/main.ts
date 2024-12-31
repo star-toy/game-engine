@@ -1,4 +1,4 @@
-import { Controller } from './entities/controller';
+import { Controller } from './controller';
 
 const canvasElement = document.querySelector<HTMLCanvasElement>('#app');
 

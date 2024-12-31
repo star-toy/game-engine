@@ -1,4 +1,4 @@
-import { CursorStyle, State } from './states/state-stack';
+import { CursorStyle, State } from '../view/states/state-stack';
 
 class Mediator {
   private subscribers = new Map<

@@ -1,6 +1,6 @@
 import { CursorStyle, State } from './state-stack';
 import { PanState } from './pan-state';
-import mediator, { PUSH_STATE_STACK, ZOOM } from '../mediator';
+import mediator, { PUSH_STATE_STACK, ZOOM } from '../../mediator';
 
 export class IdleState implements State {
   public readonly cursor: CursorStyle = {

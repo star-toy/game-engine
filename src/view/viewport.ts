@@ -1,13 +1,12 @@
-import {
+import mediator, {
   CHANGE_CURSOR,
   MOUSE_DOWN,
   MOUSE_LEAVE,
   MOUSE_MOVE,
   MOUSE_UP,
   WHEEL,
-} from './mediator';
+} from '../mediator';
 
-import mediator from './mediator';
 import stateStack, { CursorStyle } from './states/state-stack';
 import transform from './transform';
 

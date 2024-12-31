@@ -1,4 +1,4 @@
-import mediator, { TRANSLATE, ZOOM } from './mediator';
+import mediator, { TRANSLATE, ZOOM } from '../mediator';
 
 export const MIN_SCALE = 0.2;
 export const MAX_SCALE = 2;

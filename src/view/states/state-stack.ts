@@ -7,7 +7,7 @@ import mediator, {
   POP_STATE_STACK,
   CHANGE_CURSOR,
   WHEEL,
-} from '../mediator';
+} from '../../mediator';
 import { IdleState } from './idle-state';
 
 export interface State {
