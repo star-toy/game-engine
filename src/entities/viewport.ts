@@ -8,12 +8,14 @@ import {
 
 import mediator from './mediator';
 import stateStack, { CursorStyle } from './states/state-stack';
+import transform from './transform';
 
 export class Viewport {
   private ctx: CanvasRenderingContext2D;
   private stateStack = stateStack;
+  private transform = transform;
 
-  private scale: number = 1;
+  private devicePixelRatio = window.devicePixelRatio ?? 1;
 
   public constructor(
     private canvas: HTMLCanvasElement,
@@ -27,11 +29,15 @@ export class Viewport {
   }
 
   public render = () => {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    const width = this.canvas.width / this.devicePixelRatio;
+    const height = this.canvas.height / this.devicePixelRatio;
+
+    this.ctx.clearRect(0, 0, width, height);
+
+    this.ctx.setTransform(this.transform.matrix);
   };
 
   public initializeCanvasSize() {
-    const devicePixelRatio = window.devicePixelRatio ?? 1;
     const width = window.screen.availWidth;
     const height =
       window.screen.availHeight -
@@ -41,12 +47,12 @@ export class Viewport {
     this.canvas.style.width = `${width}px`;
     this.canvas.style.height = `${height}px`;
 
-    this.canvas.width = Math.floor(width * devicePixelRatio);
-    this.canvas.height = Math.floor(height * devicePixelRatio);
+    this.canvas.width = Math.floor(width * this.devicePixelRatio);
+    this.canvas.height = Math.floor(height * this.devicePixelRatio);
 
     this.ctx.scale(
-      this.scale * devicePixelRatio,
-      this.scale * devicePixelRatio,
+      this.transform.scale * this.devicePixelRatio,
+      this.transform.scale * this.devicePixelRatio,
     );
   }
 
