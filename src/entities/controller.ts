@@ -20,6 +20,4 @@ export class Controller {
   // TODO: Artwork Preview
   // TODO: BGM
   // TODO: Sound Effect
-  // TODO: Zoom in
-  // TODO: Zoom out
 }
