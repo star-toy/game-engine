@@ -1,14 +1,19 @@
 import mediator, { CHANGE_IMAGE, CHANGE_PIECES_INDEX } from '../mediator';
+import { Pieces } from './pieces';
 
-interface PiecesOption {
+export interface PiecesOption {
   total: number;
   rows: number;
   columns: number;
+  width: number;
+  height: number;
 }
 
 const MINIMUM_PIECE_SIZE = 40;
 
 class Model {
+  private pieces: Pieces;
+
   #piecesOptions!: PiecesOption[];
   #selectedPiecesOption!: PiecesOption;
 
@@ -68,6 +73,8 @@ class Model {
           total: rows * columns,
           rows,
           columns,
+          width: pieceSize,
+          height: pieceSize,
         };
       })
       .filter((option) => option.total >= MINIMUM_PIECE_SIZE);
