@@ -1,3 +1,5 @@
+import mediator, { CHANGE_PIECES_INDEX } from '../mediator';
+
 interface PiecesOption {
   total: number;
   rows: number;
@@ -16,6 +18,8 @@ class Model {
     }
 
     this.piecesOptions = image;
+
+    this.initializeEventSubscribers();
   }
 
   public get selectedPiecesOption(): PiecesOption {
@@ -30,6 +34,12 @@ class Model {
     this.#piecesOptions = this.getPieceOptions(image);
     const middleIndex = Math.round((this.#piecesOptions.length - 1) / 2);
     this.selectedPiecesOption = middleIndex;
+  }
+
+  public initializeEventSubscribers() {
+    mediator.subscribe(CHANGE_PIECES_INDEX, (index: number) => {
+      this.selectedPiecesOption = index;
+    });
   }
 
   public changeImage(image: HTMLImageElement) {

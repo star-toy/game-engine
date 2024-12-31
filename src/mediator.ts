@@ -54,6 +54,8 @@ export const TRANSLATE = 'translate';
 export const PUSH_STATE_STACK = 'push-state-stack';
 export const POP_STATE_STACK = 'pop-state-stack';
 
+export const CHANGE_PIECES_INDEX = 'change-pieces-index';
+
 export interface EventMap {
   [MOUSE_DOWN]: (detail: MouseEvent) => void;
   [MOUSE_MOVE]: (detail: DOMPoint) => void;
@@ -69,4 +71,6 @@ export interface EventMap {
 
   [PUSH_STATE_STACK]: (detail: State) => void;
   [POP_STATE_STACK]: (detail: null) => void;
+
+  [CHANGE_PIECES_INDEX]: (detail: number) => void;
 }
