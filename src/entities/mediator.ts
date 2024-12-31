@@ -46,6 +46,7 @@ export const MOUSE_LEAVE = 'mouse-leave';
 
 export const CHANGE_CURSOR = 'change-cursor';
 
+export const WHEEL = 'wheel';
 export const ZOOM = 'zoom';
 
 export const PUSH_STATE_STACK = 'push-state-stack';
@@ -59,7 +60,8 @@ export interface EventMap {
 
   [CHANGE_CURSOR]: (detail: CursorStyle) => void;
 
-  [ZOOM]: (detail: number) => void;
+  [WHEEL]: (detail: WheelEvent['deltaY']) => void;
+  [ZOOM]: (detail: WheelEvent['deltaY']) => void;
 
   [PUSH_STATE_STACK]: (detail: State) => void;
   [POP_STATE_STACK]: (detail: null) => void;

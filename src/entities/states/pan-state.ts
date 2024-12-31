@@ -1,5 +1,5 @@
 import { CursorStyle, State } from './state-stack';
-import mediator, { MOUSE_MOVE, POP_STATE_STACK } from '../mediator';
+import mediator, { MOUSE_MOVE, POP_STATE_STACK, ZOOM } from '../mediator';
 
 export class PanState implements State {
   public readonly cursor: CursorStyle = {
@@ -19,6 +19,8 @@ export class PanState implements State {
   public handleMouseLeave(event: MouseEvent) {
     this.handleInteractionEnd();
   }
+
+  public handleMouseWheel(deltaY: WheelEvent['deltaY']) {}
 
   public draw(ctx: CanvasRenderingContext2D) {}
 

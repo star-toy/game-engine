@@ -6,6 +6,7 @@ import mediator, {
   PUSH_STATE_STACK,
   POP_STATE_STACK,
   CHANGE_CURSOR,
+  WHEEL,
 } from '../mediator';
 import { IdleState } from './idle-state';
 
@@ -15,6 +16,7 @@ export interface State {
   handleMouseDown(event: MouseEvent): void;
   handleMouseMove(point: DOMPoint): void;
   handleMouseUp(point: DOMPoint): void;
+  handleMouseWheel(delta: number): void;
   handleMouseLeave(event: MouseEvent): void;
 
   draw(ctx: CanvasRenderingContext2D): void;
@@ -53,6 +55,10 @@ class StateStack {
     );
     mediator.subscribe(MOUSE_LEAVE, (event: MouseEvent) =>
       this.current.handleMouseLeave(event),
+    );
+
+    mediator.subscribe(WHEEL, (deltaY: WheelEvent['deltaY']) =>
+      this.current.handleMouseWheel(deltaY),
     );
 
     mediator.subscribe(PUSH_STATE_STACK, (state: State) => this.push(state));

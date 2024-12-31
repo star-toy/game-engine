@@ -4,7 +4,7 @@ import {
   MOUSE_LEAVE,
   MOUSE_MOVE,
   MOUSE_UP,
-  ZOOM,
+  WHEEL,
 } from './mediator';
 
 import mediator from './mediator';
@@ -72,7 +72,7 @@ export class Viewport {
       'wheel',
       (event) => {
         event.preventDefault();
-        mediator.publish(ZOOM, event.deltaY);
+        mediator.publish(WHEEL, event.deltaY);
       },
       { passive: false },
     );

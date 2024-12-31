@@ -1,6 +1,6 @@
 import { CursorStyle, State } from './state-stack';
 import { PanState } from './pan-state';
-import mediator, { PUSH_STATE_STACK } from '../mediator';
+import mediator, { PUSH_STATE_STACK, ZOOM } from '../mediator';
 
 export class IdleState implements State {
   public readonly cursor: CursorStyle = {
@@ -16,6 +16,10 @@ export class IdleState implements State {
   public handleMouseMove(point: DOMPoint) {}
   public handleMouseUp(point: DOMPoint) {}
   public handleMouseLeave(event: MouseEvent) {}
+
+  public handleMouseWheel(deltaY: WheelEvent['deltaY']) {
+    mediator.publish(ZOOM, deltaY);
+  }
 
   public draw(ctx: CanvasRenderingContext2D) {}
 
