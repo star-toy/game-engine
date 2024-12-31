@@ -49,6 +49,8 @@ export const CHANGE_CURSOR = 'change-cursor';
 export const WHEEL = 'wheel';
 export const ZOOM = 'zoom';
 
+export const TRANSLATE = 'translate';
+
 export const PUSH_STATE_STACK = 'push-state-stack';
 export const POP_STATE_STACK = 'pop-state-stack';
 
@@ -62,6 +64,8 @@ export interface EventMap {
 
   [WHEEL]: (detail: WheelEvent['deltaY']) => void;
   [ZOOM]: (detail: WheelEvent['deltaY']) => void;
+
+  [TRANSLATE]: (detail: { dx: number; dy: number }) => void;
 
   [PUSH_STATE_STACK]: (detail: State) => void;
   [POP_STATE_STACK]: (detail: null) => void;

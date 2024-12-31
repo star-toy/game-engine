@@ -1,5 +1,5 @@
 import { CursorStyle, State } from './state-stack';
-import mediator, { MOUSE_MOVE, POP_STATE_STACK, ZOOM } from '../mediator';
+import mediator, { MOUSE_MOVE, POP_STATE_STACK, TRANSLATE } from '../mediator';
 
 export class PanState implements State {
   public readonly cursor: CursorStyle = {
@@ -31,7 +31,12 @@ export class PanState implements State {
   }
 
   private handleInteractionMove(point: DOMPoint) {
-    // TODO: translate viewport
+    const dx = point.x - this.origin.x;
+    const dy = point.y - this.origin.y;
+
+    mediator.publish(TRANSLATE, { dx, dy });
+
+    this.origin = point;
   }
 
   private handleInteractionEnd() {

@@ -1,4 +1,4 @@
-import mediator, { ZOOM } from './mediator';
+import mediator, { TRANSLATE, ZOOM } from './mediator';
 
 export const MIN_SCALE = 0.2;
 export const MAX_SCALE = 2;
@@ -23,6 +23,10 @@ class Transform {
 
     mediator.subscribe(ZOOM, (detail: WheelEvent['deltaY']) => {
       this.handleScale(detail);
+    });
+
+    mediator.subscribe(TRANSLATE, (detail: { dx: number; dy: number }) => {
+      this.handleTranslate(detail);
     });
   }
 
@@ -52,6 +56,10 @@ class Transform {
       .translate(centerX, centerY)
       .scale(scaleFactor)
       .translate(-centerX, -centerY);
+  }
+
+  private handleTranslate({ dx, dy }: { dx: number; dy: number }) {
+    this.matrix = this.matrix.translate(dx / this.scale, dy / this.scale);
   }
 }
 
