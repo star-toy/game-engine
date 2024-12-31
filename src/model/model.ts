@@ -1,4 +1,4 @@
-import mediator, { CHANGE_PIECES_INDEX } from '../mediator';
+import mediator, { CHANGE_IMAGE, CHANGE_PIECES_INDEX } from '../mediator';
 
 interface PiecesOption {
   total: number;
@@ -39,6 +39,10 @@ class Model {
   public initializeEventSubscribers() {
     mediator.subscribe(CHANGE_PIECES_INDEX, (index: number) => {
       this.selectedPiecesOption = index;
+    });
+
+    mediator.subscribe(CHANGE_IMAGE, (image: HTMLImageElement) => {
+      this.piecesOptions = image;
     });
   }
 

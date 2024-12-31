@@ -55,6 +55,7 @@ export const PUSH_STATE_STACK = 'push-state-stack';
 export const POP_STATE_STACK = 'pop-state-stack';
 
 export const CHANGE_PIECES_INDEX = 'change-pieces-index';
+export const CHANGE_IMAGE = 'change-image';
 
 export interface EventMap {
   [MOUSE_DOWN]: (detail: MouseEvent) => void;
@@ -73,4 +74,5 @@ export interface EventMap {
   [POP_STATE_STACK]: (detail: null) => void;
 
   [CHANGE_PIECES_INDEX]: (detail: number) => void;
+  [CHANGE_IMAGE]: (detail: HTMLImageElement) => void;
 }
