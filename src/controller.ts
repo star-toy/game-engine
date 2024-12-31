@@ -1,10 +1,13 @@
+import Model from './model/model';
 import { Viewport } from './view/viewport';
 
 export class Controller {
   private viewport: Viewport;
+  private model: Model;
 
-  public constructor(canvas: HTMLCanvasElement) {
+  public constructor(canvas: HTMLCanvasElement, image: HTMLImageElement) {
     this.viewport = new Viewport(canvas);
+    this.model = new Model(image);
   }
 
   public render = () => {
